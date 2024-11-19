@@ -1,5 +1,6 @@
 const Contato = require("./Contato");
 const GerenciadorContatos = require("./GerenciadorContatos");
+const DecoratorGerenciador = require("./decorator/decoratorGerenciador.js")
 const readline = require('readline');
 
 const rl = readline.createInterface({
@@ -11,6 +12,8 @@ const rl = readline.createInterface({
 });
 
 const gerenciador = new GerenciadorContatos()
+
+const decorator = new DecoratorGerenciador(gerenciador)
 
 const exibirComandos = () => {
 
@@ -54,9 +57,7 @@ const main = async () => {
 
             const novoContato = new Contato(nome, telefone, email);
 
-            gerenciador.adicionarContato(novoContato);
-
-            console.log(`\nContato ${nome} adicionado com sucesso!`);
+            decorator.adicionarContato(novoContato);
 
             break;
 
@@ -64,7 +65,7 @@ const main = async () => {
 
             const nomeRemover = await obterEntrada('Digite o nome do contato a remover: ');
 
-            if (gerenciador.removerContato(nomeRemover)) {
+            if (decorator.removerContato(nomeRemover)) {
 
                 console.log(`\nContato ${nomeRemover} removido com sucesso!`);
 
