@@ -1,8 +1,16 @@
 class GerenciadorContatos {
 
-    constructor() {
+    constructor(strategy) {
 
         this.contatos = [];
+
+        this.strategyBusca = strategy;
+
+    }
+
+    setStrategy(strategy) {
+
+        this.strategyBusca = strategy;
 
     }
 
@@ -20,11 +28,11 @@ class GerenciadorContatos {
 
             this.contatos.splice(index, 1);
 
-            return true; 
+            return true;
 
         }
 
-        return false; 
+        return false;
 
     }
 
@@ -34,12 +42,12 @@ class GerenciadorContatos {
 
     }
 
-    buscarContato(nome) {
+    buscarContato(chave) {
 
-        return this.contatos.find(contato => contato.nome === nome);
+        return this.strategyBusca.buscar(this.contatos, chave);
 
     }
-    
+
 }
 
 module.exports = GerenciadorContatos;

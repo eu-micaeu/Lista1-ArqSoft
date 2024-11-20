@@ -39,3 +39,8 @@ Você foi contratado para desenvolver um sistema de gerenciamento de contatos em
 - A documentação deve conter:
   - Os padrões de projeto escolhidos.
   - Justificativas para a seleção dos padrões de projeto.
+
+## Padrões utilizados
+
+- Strategy
+- Decorator
