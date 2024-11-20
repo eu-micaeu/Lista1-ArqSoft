@@ -1,6 +1,9 @@
 const Contato = require("./Contato");
 const GerenciadorContatos = require("./GerenciadorContatos");
-const DecoratorGerenciador = require("./decorator/decoratorGerenciador.js")
+const DecoratorGerenciador = require("./decorator/decoratorGerenciador.js");
+const StrategyBusca = require("./strategy/StrategyBusca.js");
+const BuscaNome = require("./strategy/BuscaNome.js");
+const BuscaTelefone = require("./strategy/BuscaTelefone.js");
 const readline = require('readline');
 
 const rl = readline.createInterface({
@@ -11,7 +14,7 @@ const rl = readline.createInterface({
 
 });
 
-const gerenciador = new GerenciadorContatos()
+const gerenciador = new GerenciadorContatos(new StrategyBusca())
 
 const decorator = new DecoratorGerenciador(gerenciador)
 
@@ -27,9 +30,11 @@ const exibirComandos = () => {
 
     console.log('3: Listar contatos');
 
-    console.log('4: Buscar contato');
+    console.log('4: Buscar contato por nome');
 
-    console.log('5: Sair\n');
+    console.log('5: Buscar contato por telefone');
+
+    console.log('6: Sair\n');
 
 };
 
@@ -101,6 +106,8 @@ const main = async () => {
 
         case '4':
 
+            gerenciador.setStrategy(new BuscaNome());
+
             const nomeBuscar = await obterEntrada('Digite o nome do contato a buscar: ');
 
             const contato = gerenciador.buscarContato(nomeBuscar);
@@ -118,6 +125,32 @@ const main = async () => {
             break;
 
         case '5':
+
+            gerenciador.setStrategy(new BuscaTelefone());
+
+            const telefoneBuscar = await obterEntrada('Digite o telefone do contato a buscar: ');
+
+            const lista = gerenciador.buscarContato(telefoneBuscar);
+
+            if (lista.length > 0) {
+
+                console.log(`\n-= Contatos Encontrados =-`)
+
+                lista.forEach(contato => {
+
+                    console.log(`Nome: ${contato.nome}, Telefone: ${contato.telefone}, Email: ${contato.email}`);
+                    
+                });
+
+            } else {
+
+                console.log(`\nContatos não encontrados com esse telefone.`);
+
+            }
+
+        break;
+
+        case '6':
 
             console.log('\nSaindo do sistema...');
 
