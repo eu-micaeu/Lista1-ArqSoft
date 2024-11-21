@@ -14,11 +14,11 @@ const rl = readline.createInterface({
 
 });
 
-const gerenciador = new GerenciadorContatos(new StrategyBusca())
+const gerenciador = new GerenciadorContatos(new StrategyBusca()) // Criação do gerenciador de contatos com a estratégia inicial de busca
 
-const decorator = new DecoratorGerenciador(gerenciador)
+const decorator = new DecoratorGerenciador(gerenciador) // Criação de um decorador para o gerenciador, possibilitando a adição de funcionalidades
 
-const exibirComandos = () => {
+const exibirComandos = () => { // Função para exibir os comandos disponíveis no sistema
 
     console.log('\nSistema de Gerenciamento de Contatos');
 
@@ -38,13 +38,13 @@ const exibirComandos = () => {
 
 };
 
-const obterEntrada = (pergunta) => {
+const obterEntrada = (pergunta) => { // Função que recebe a entrada do usuário de forma assíncrona
 
     return new Promise(resolve => rl.question(pergunta, resolve));
 
 };
 
-const main = async () => {
+const main = async () => { // Função principal que controla o fluxo do sistema
 
     exibirComandos();
 
@@ -170,4 +170,4 @@ const main = async () => {
 
 };
 
-main();
+main(); // Chama a função principal para iniciar o sistema

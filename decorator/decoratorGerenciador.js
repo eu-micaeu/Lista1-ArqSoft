@@ -1,12 +1,12 @@
 class DecoratorGerenciador {
 
-    constructor(gerenciador) {
+    constructor(gerenciador) { // O construtor recebe o gerenciador de contatos e o armazena para ser decorado
 
         this.gerenciador = gerenciador;
 
     }
 
-    adicionarContato(contato) {
+    adicionarContato(contato) { // Método para adicionar um novo contato
 
         if (this.gerenciador.contatos.some(item => item.nome === contato.nome)) {
 
@@ -28,7 +28,7 @@ class DecoratorGerenciador {
 
     }
 
-    removerContato(nome) {
+    removerContato(nome) { // Método para remover um contato
 
         const contato = this.gerenciador.buscarContato(nome);
 
@@ -45,7 +45,8 @@ class DecoratorGerenciador {
 
 }
 
-function infoContato (contato) {
+function infoContato (contato) { // Função auxiliar para exibir as informações de um contato
+
     console.log(`\n-= Informações do contato =-`);
 
     console.log(`\nNome: ${contato.nome}`);
@@ -55,6 +56,7 @@ function infoContato (contato) {
     console.log(`Email: ${contato.email}`);
 
     console.log(`\n-===========================-`);
+
 }
 
-module.exports = DecoratorGerenciador;
+module.exports = DecoratorGerenciador; // Exporta a classe para uso em outros módulos
